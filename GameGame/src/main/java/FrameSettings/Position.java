@@ -1,5 +1,8 @@
 package FrameSettings;
 
+/**
+ * The Position helps us to know where our player is on the board
+ */
 public class Position {
 
     public int x;

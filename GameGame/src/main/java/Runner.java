@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Runner program implements an application. Player moves on a board horizontally and vertically.
+ * On his way may appear block such as wall
+ */
 public class Runner {
 
 
@@ -11,6 +15,11 @@ public class Runner {
     static ArrayList<Point> path = new ArrayList<>();
     public static boolean flag = false;
 
+    /**
+     * This is the main method which makes use of Runner
+     *
+     * @param args Unused
+     */
     public static void main(String[] args) {
 
         File file = new File("Frame.txt");
@@ -42,6 +51,10 @@ public class Runner {
         while (true);
     }
 
+
+    /**
+     * Method displays board
+     */
     public static void DisplayBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -51,8 +64,15 @@ public class Runner {
         }
     }
 
+    /**
+     * Method is used when player use function P-point.
+     * It leaves char P on board and player is moved to random way if isn't blocked
+     *
+     * @param x move player horizontally one step on board if wall isn't on its way
+     * @param y move player vertically one step on board if wall isn't on its way
+     */
     public static void moveRandom(int x, int y) {
-        if (board[x][y] == 'P') {
+        {
 
             board[x][y + 1] = 'R';
             if (!(wall(x, y)))
@@ -68,10 +88,23 @@ public class Runner {
         return;
     }
 
+    /**
+     * Method checks if wall is on players way
+     *
+     * @param x
+     * @param y
+     * @return true if wall exists false otherwise
+     */
     public static boolean wall(int x, int y) {
         return board[x][y] == '#';
     }
 
+    /**
+     * Method is used to move player in choosen way. You can go horizontally and vertically.
+     * If wall is on players way it is blocked and have to change direction
+     * Player can leave P-point on board and player should be moved to different place
+     * Choosing Z should return player to the P-point
+     */
     public static void MoveR() {
 
         Scanner MoveR = new Scanner(System.in);
@@ -116,18 +149,15 @@ public class Runner {
                             board[i][j] = ' ';
                             board[i][j - 1] = 'R';
                         }
-                    }
-
-                    else if (move.equals("P")){
+                    } else if (move.equals("P")) {
                         board[i][j] = 'P';
-                        moveRandom(i,j);
+                        moveRandom(i, j);
                         flag = true;
-                    }
-                    else if (move.equals("Z")){
-                        for (i = path.size(); i > path.size(); i--){
+                    } else if (move.equals("Z")) {
+                        for (i = path.size(); i > path.size(); i--) {
                             try {
                                 Thread.sleep(1000);
-                            }catch (InterruptedException e){
+                            } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                             System.out.println(path);
